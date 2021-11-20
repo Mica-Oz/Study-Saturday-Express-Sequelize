@@ -1,7 +1,7 @@
-const Sequelize = require('sequelize');
-const db = require('../db');
+const Sequelize = require("sequelize");
+const db = require("../db");
 
-const Student = db.define('student', {
+const Student = db.define("student", {
   firstName: {
     type: Sequelize.STRING,
     allowNull: false,
@@ -13,13 +13,14 @@ const Student = db.define('student', {
   email: {
     type: Sequelize.STRING,
     allowNull: false,
+    unique: true,
     validate: {
       isEmail: true,
     },
   },
 });
 
-Student.beforeCreate((student) => {
+Student.beforeCreate(async (student) => {
   const nameFirst = student.firstName;
   const nameLast = student.lastName;
 
